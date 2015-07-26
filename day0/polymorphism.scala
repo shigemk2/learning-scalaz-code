@@ -4,3 +4,11 @@ println(head(1 :: 2 :: Nil))
 case class Car(make: String)
 println(head(Car("Civic") :: Car("CR-V") :: Nil))
 
+// 派生型多態
+// def plus[A](a1: A, a2: A): A = ???
+trait Plus[A] {
+  def plus(a2: A): A
+}
+def plus[A <: Plus[A]](a1: A, a2: A): A = a1.plus(a2)
+
+
