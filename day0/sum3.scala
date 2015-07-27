@@ -8,6 +8,9 @@ object IntMonoid extends Monoid[Int] {
   def mzero: Int = 0
 }
 
-def sum(xs: List[Int], m: Monoid[Int]): Int = xs.foldLeft(m.mzero)(m.mappend)
+def sum[A](xs: List[A])(implicit m: Monoid[A]): A = xs.foldLeft(m.mzero)(m.mappend)
 
-println(sum(List(1,2,3,4), IntMonoid))
+implicit val intMonoid = IntMonoid
+
+println(sum(List(1,2,3,4))(IntMonoid))
+println(sum(List(1,2,3,4)))
