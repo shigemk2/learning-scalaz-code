@@ -19,10 +19,15 @@ trait MonoidOp[A] {
   def |+|(a2: A) = F.mappend(value, a2)
 }
 
-implicit def toMonoidOp[A: Monoid](a: A): MonoidOp[A] = new MonoidOp[A] {
-  val F = implicitly[Monoid[A]]
-  val value = a
+object Enrich2 {
+  implicit def toMonoidOp[A: Monoid](a: A): MonoidOp[A] = new MonoidOp[A] {
+    val F = implicitly[Monoid[A]]
+    val value = a
+  }
+
+  def main(args: Array[String]): Unit = {
+    println(3 |+| 4)
+    println("a" |+| "b")
+  }
 }
 
-println(3 |+| 4)
-println("a" |+| "b")
