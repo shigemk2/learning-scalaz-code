@@ -1,17 +1,4 @@
-trait Monoid[A] {
-  def mappend(a1: A, a2: A): A
-  def mzero: A
-}
-
-object IntMonoid extends Monoid[Int] {
-  def mappend(a: Int, b: Int): Int = a + b
-  def mzero: Int = 0
-}
-
-object StringMonoid extends Monoid[String] {
-  def mappend(a: String, b: String): String = a + b
-  def mzero: String = ""
-}
+import scala.language.implicitConversions
 
 trait MonoidOp[A] {
   val F: Monoid[A]
@@ -26,8 +13,8 @@ object Enrich2 {
   }
 
   def main(args: Array[String]): Unit = {
-    println(3 |+| 4)
-    println("a" |+| "b")
+    // 3 |+| 4
+    // "a" |+| "b"
   }
 }
 
