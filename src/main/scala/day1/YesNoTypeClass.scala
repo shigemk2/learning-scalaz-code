@@ -48,5 +48,13 @@ object YesNoTypeClass {
     implicit val booleanCanTruthy: CanTruthy[Boolean] = CanTruthy.truthys(identity)
 
     println(false.truthy)
+
+    def truthyIf[A: CanTruthy, B, C](cond: A)(ifyes: => B)(ifno: => C) =
+      if(cond.truthy) ifyes
+      else ifno
+
+    println(truthyIf(Nil) {"YEAH!"} {"NO!"})
+    println(truthyIf(2 :: 3:: 4 :: Nil) {"YEAH!"} {"NO!"})
+    println(truthyIf(true) {"YEAH!"} {"NO!"})
   }
 }
