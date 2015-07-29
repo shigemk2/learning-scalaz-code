@@ -34,5 +34,13 @@ object YesNoTypeClass {
     })
 
     println(10.truthy)
+
+    implicit def listCanTruthy[A]: CanTruthy[List[A]] = CanTruthy.truthys({
+      case Nil => false
+      case _   => true
+    })
+
+    println(List("foo").truthy)
+    println(Nil.truthy)
   }
 }
