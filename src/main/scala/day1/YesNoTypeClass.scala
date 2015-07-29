@@ -44,5 +44,9 @@ object YesNoTypeClass {
 
     implicit val nilCanTruthy: CanTruthy[scala.collection.immutable.Nil.type] = CanTruthy.truthys(_ => false)
     println(Nil.truthy)
+
+    implicit val booleanCanTruthy: CanTruthy[Boolean] = CanTruthy.truthys(identity)
+
+    println(false.truthy)
   }
 }
