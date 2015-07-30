@@ -10,5 +10,8 @@ object Applicative {
 
     // おまじない import Scalaz._ がないと死ぬ
     println(1.point[List])
+    println(1.point[Option])
+    println(1.point[Option] map { _ + 2 })
+    println(1.point[List] map { _ + 2 })
   }
 }
