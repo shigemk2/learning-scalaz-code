@@ -25,5 +25,14 @@ object Apply {
     // println(streamZipApplicative.ap(Tags.Zip(Stream(1, 2))) (Tags.Zip(Stream({(_: Int) + 3}, {(_: Int) * 2}))).toList)
 
     println(scalaz.Apply[Option].lift2((_: Int) :: (_: List[Int]))(3.some, List(4).some))
+
+    def sequenceA[F[_]: Applicative, A](list: List[F[A]]): F[List[A]] = list match {
+      case Nil => (Nil: List[A]).point[F]
+      case x :: xs => (x |@| sequenceA(xs)) {_ :: _}
+    }
+
+    println(sequenceA(List(1.some, 2.some)))
+    println(sequenceA(List(3.some, none, 1.some)))
+    println(sequenceA(List(List(1,2,3), List(4,5,6))))
   }
 }
