@@ -14,5 +14,7 @@ object Apply {
 
     println(^(3.some, 5.some) {_ + _})
     println(^(3.some, none[Int]) {_ + _})
+
+    println((3.some |@| 5.some) {_ + _})
   }
 }
