@@ -11,5 +11,8 @@ object Apply {
 
     println(9.some <*> {(_: Int) + 3}.some)
     println(3.some <*> { 9.some <*> {(_: Int) + (_: Int)}.curried.some })
+
+    println(^(3.some, 5.some) {_ + _})
+    println(^(3.some, none[Int]) {_ + _})
   }
 }
