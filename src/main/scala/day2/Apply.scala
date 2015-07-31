@@ -34,5 +34,9 @@ object Apply {
     println(sequenceA(List(1.some, 2.some)))
     println(sequenceA(List(3.some, none, 1.some)))
     println(sequenceA(List(List(1,2,3), List(4,5,6))))
+
+    type Function1Int[A] = ({type l[A]=Function1[Int, A]})#l[A]
+    val res1 = sequenceA(List((_: Int) + 3, (_: Int) + 2, (_: Int) + 1): List[Function1Int[Int]])
+    println(res1(3))
   }
 }
