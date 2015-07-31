@@ -23,5 +23,7 @@ object Apply {
 
     println(streamZipApplicative.ap(Tags.Zip(Stream(1, 2))) (Tags.Zip(Stream({(_: Int) + 3}, {(_: Int) * 2}))))
     // println(streamZipApplicative.ap(Tags.Zip(Stream(1, 2))) (Tags.Zip(Stream({(_: Int) + 3}, {(_: Int) * 2}))).toList)
+
+    println(scalaz.Apply[Option].lift2((_: Int) :: (_: List[Int]))(3.some, List(4).some))
   }
 }
