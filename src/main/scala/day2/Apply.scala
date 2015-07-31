@@ -20,5 +20,8 @@ object Apply {
     println(List(1,2,3) <*> List((_: Int) * 0, (_: Int) + 100, (x: Int) => x * x))
     println(List(3,4) <*> {List(1,2) <*> List({(_: Int) + (_: Int)}.curried, {(_: Int) * (_: Int)}.curried)})
     println((List("ha", "heh", "hmm") |@| List("?", "!", ".")) {_ + _})
+
+    println(streamZipApplicative.ap(Tags.Zip(Stream(1, 2))) (Tags.Zip(Stream({(_: Int) + 3}, {(_: Int) * 2}))))
+    // println(streamZipApplicative.ap(Tags.Zip(Stream(1, 2))) (Tags.Zip(Stream({(_: Int) + 3}, {(_: Int) * 2}))).toList)
   }
 }
