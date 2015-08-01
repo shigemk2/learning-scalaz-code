@@ -12,3 +12,16 @@ object Monoid3 {
     println(List("la") ++ (List("di") ++ List("da")) assert_=== (List("la") ++ List("di")) ++ List("da"))
   }
 }
+
+object Semigroup3 {
+  import scalaz._
+  import Scalaz._
+
+  def main(args: Array[String]): Unit = {
+    println(List(1,2,3) mappend List(4,5,6))
+    println("one" mappend "two")
+
+    println(List(1,2,3) |+| List(4,5,6))
+    println("one" |+| "two")
+  }
+}
