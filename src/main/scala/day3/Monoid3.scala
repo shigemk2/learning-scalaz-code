@@ -28,3 +28,19 @@ object Semigroup3 {
     println("one" |+| "two")
   }
 }
+
+object TagMultiplication {
+  import scalaz._
+  import Scalaz._
+
+  def main(args: Array[String]): Unit = {
+    println(Tags.Multiplication(10) |+| Monoid[Int @@ Tags.Multiplication].zero)
+    println(10 |+| Monoid[Int].zero)
+
+    println(Tags.Disjunction(true) |+| Tags.Disjunction(false))
+    println(Monoid[Boolean @@ Tags.Disjunction].zero |+| Tags.Disjunction(true))
+    println(Monoid[Boolean @@ Tags.Disjunction].zero |+| Monoid[Boolean @@ Tags.Disjunction].zero)
+    println(Monoid[Boolean @@ Tags.Conjunction].zero |+| Tags.Conjunction(true))
+    println(Monoid[Boolean @@ Tags.Conjunction].zero |+| Tags.Conjunction(false))
+  }
+}
