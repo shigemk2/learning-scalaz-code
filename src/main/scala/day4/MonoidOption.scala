@@ -9,5 +9,9 @@ object MonoidOption {
     println(Tags.First('a'.some) |+| Tags.First('b'.some))
     println(Tags.First(none: Option[Char]) |+| Tags.First('b'.some))
     println(Tags.First('a'.some) |+| Tags.First(none: Option[Char]))
+
+    println(Tags.Last('a'.some) |+| Tags.Last('b'.some))
+    println(Tags.Last(none: Option[Char]) |+| Tags.Last('b'.some))
+    println(Tags.Last('a'.some) |+| Tags.Last(none: Option[Char]))
   }
 }
