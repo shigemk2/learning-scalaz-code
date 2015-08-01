@@ -7,5 +7,8 @@ object Monoid3 {
     println(1 * 9)
     println(List(1,2,3) ++ Nil)
     println(Nil ++ List(0.5, 1.5))
+
+    println((3 * 2) * (8 * 5) assert_=== 3 * (2 * (8 * 5)))
+    println(List("la") ++ (List("di") ++ List("da")) assert_=== (List("la") ++ List("di")) ++ List("da"))
   }
 }
