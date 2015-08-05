@@ -16,5 +16,14 @@ object Banana {
     }
 
     println(Monad[Option].point(Pole(0, 0)) >>= {_.landLeft(1)} >>= {_.banana} >>= {_.landRight(1)})
+
+    println((none: Option[Int]) >> 3.some)
+
+    println(3.some >> 4.some)
+    println(3.some >> (none: Option[Int]))
+
+    println(Monad[Option].point(Pole(0, 0)).>>=({_.landLeft(1)}).>>(none: Option[Pole]).>>=({_.landRight(1)}))
+    println(Monad[Option].point(Pole(0, 0)).>>=({_.landLeft(1)}).>>(none: Option[Pole]).>>=({_.landRight(1)}))
+    println((Monad[Option].point(Pole(0, 0)) >>= {_.landLeft(1)}) >> (none: Option[Pole]) >>= {_.landRight(1)})
   }
 }
