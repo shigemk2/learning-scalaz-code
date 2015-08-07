@@ -25,5 +25,14 @@ object Banana {
     println(Monad[Option].point(Pole(0, 0)).>>=({_.landLeft(1)}).>>(none: Option[Pole]).>>=({_.landRight(1)}))
     println(Monad[Option].point(Pole(0, 0)).>>=({_.landLeft(1)}).>>(none: Option[Pole]).>>=({_.landRight(1)}))
     println((Monad[Option].point(Pole(0, 0)) >>= {_.landLeft(1)}) >> (none: Option[Pole]) >>= {_.landRight(1)})
+
+    println(3.some >>= { x => "!".some >>= { y => (x.shows + y).some } })
+    println(3.some >>= { x => (none: Option[String]) >>= { y => (x.shows + y).some } })
+    println((none: Option[Int]) >>= { x => "!".some >>= { y => (x.shows + y).some } })
+    println(3.some >>= { x => "!".some >>= { y => (none: Option[String]) } })
+    println(for {
+         x <- 3.some
+         y <- "!".some
+       } yield (x.shows + y))
   }
 }
