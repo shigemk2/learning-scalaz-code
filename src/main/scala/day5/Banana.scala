@@ -33,6 +33,16 @@ object Banana {
     println(for {
          x <- 3.some
          y <- "!".some
-       } yield (x.shows + y))
+    } yield (x.shows + y))
+
+    def routine: Option[Pole] =
+      for {
+        start <- Monad[Option].point(Pole(0, 0))
+        first <- start.landLeft(2)
+        second <- first.landRight(2)
+        third <- second.landLeft(1)
+      } yield third
+
+    println(routine)
   }
 }
