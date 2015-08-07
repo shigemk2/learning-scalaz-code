@@ -39,6 +39,7 @@ object Banana {
       for {
         start <- Monad[Option].point(Pole(0, 0))
         first <- start.landLeft(2)
+        _ <- (none: Option[Pole])
         second <- first.landRight(2)
         third <- second.landLeft(1)
       } yield third
