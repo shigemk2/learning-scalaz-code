@@ -45,5 +45,12 @@ object Banana {
       } yield third
 
     println(routine)
+
+    def justH: Option[Char] =
+      for {
+        (x :: xs) <- "hello".toList.some
+      } yield x
+
+    println(justH)
   }
 }
