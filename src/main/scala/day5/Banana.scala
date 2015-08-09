@@ -52,5 +52,12 @@ object Banana {
       } yield x
 
     println(justH)
+
+    def wopwop: Option[Char] =
+      for {
+        (x :: xs) <- "".toList.some
+      } yield x
+
+    println(wopwop)
   }
 }
