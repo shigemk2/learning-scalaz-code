@@ -14,5 +14,16 @@ object Writer {
     }
 
     println((3, "Smallish gang.") applyLog isBigBang)
+    println(3.set("Smallish gang."))
+
+    def logNumber(x: Int): Writer[List[String], Int] =
+      x.set(List("Got nuber: " + x.shows))
+
+    def multWithLog: Writer[List[String], Int] = for {
+      a <- logNumber(3)
+      b <- logNumber(5)
+    } yield a * b
+
+    println(multWithLog.run)
   }
 }
