@@ -10,5 +10,6 @@ object Either {
 
     // Scala 標準ライブラリの Either 型はそれ単体ではモナドではないため、Scalaz を使っても使わなくても flatMap メソッドを実装しない
     // println(Left[String, Int]("boom") flatMap { x => Right[String, Int](x + 1) })
+    println(Left[String, Int]("boom").right flatMap { x => Right[String, Int](x + 1) })
   }
 }
