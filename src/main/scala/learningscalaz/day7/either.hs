@@ -1,0 +1,4 @@
+-- Prelude> :t Right 4
+-- Right 4 :: Num b => Either a b
+-- Prelude> :t Left "out of cheese error"
+-- Left "out of cheese error" :: Either [Char] b
