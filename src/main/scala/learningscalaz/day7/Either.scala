@@ -20,5 +20,8 @@ object Either {
       e3 <- "event 3 failed!".left[String]
     } yield (e1 |+| e2 |+| e3)
     )
+
+    println("event 1 ok".right.isRight)
+    println("event 1 ok".right.isLeft)
   }
 }
