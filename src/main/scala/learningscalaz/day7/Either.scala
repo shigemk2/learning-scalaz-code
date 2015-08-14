@@ -23,5 +23,11 @@ object Either {
 
     println("event 1 ok".right.isRight)
     println("event 1 ok".right.isLeft)
+
+    println("event 1 ok".right | "something bad")
+    println(~"event 2 failed!".left[String] | "something good")
+    println("event 1 ok".right map {_ + "!"})
+
+    println("event 1 failed!".left ||| "retry event 1 ok".right)
   }
 }
