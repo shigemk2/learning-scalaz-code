@@ -13,5 +13,13 @@ object MonadicFunction {
 
     println(List(1, 2, 3) filterM { x => List(true, false) })
     println(Vector(1, 2, 3) filterM { x => Vector(true, false) })
+
+    def binSmalls(acc: Int, x: Int): Option[Int] = {
+      if (x > 9) (none: Option[Int])
+      else (acc + x).some
+    }
+
+    println(List(2, 8, 3, 1).foldLeftM(0) { binSmalls })
+    println(List(2, 11, 3, 1).foldLeftM(0) { binSmalls })
   }
 }
