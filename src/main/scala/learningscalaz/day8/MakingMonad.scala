@@ -7,6 +7,12 @@ case class Prob[A](list: List[(A, Double)])
 case object Prob extends ProbInstances
 
 trait ProbInstances {
+  def flatten[B](xs: Prob[Prob[B]]): Prob[B] = {
+    def multall(innerxs: Prob[B], p: Double) =
+      innerxs.list map { case (x, r) => (x, p * r) }
+    Prob((xs.list map { case (innerxs, p) => multall(innerxs, p) }).flatten)
+  }
+
   implicit val probInstance = new Functor[Prob] {
     def map[A, B](fa: Prob[A])(f: A => B): Prob[B] =
       Prob(fa.list map { case (x, p) => (f(x), p) })
