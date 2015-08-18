@@ -20,5 +20,12 @@ object FreeTree {
           Tree.Node(_, Stream(m, n)), r)))) =>
         x.node(l, y.node('P'.node(m, n), r))
     }
+
+    println(freeTree.loc)
+    println(freeTree.loc.getChild(2) >>= {_.getChild(1)})
+    println(freeTree.loc.getChild(2) >>= {_.getChild(1)} >>= {_.getLabel.some})
+    val newFocus = freeTree.loc.getChild(2) >>= {_.getChild(1)} >>= {_.modifyLabel({_ => 'P'}).some}
+    println(newFocus.get.toTree)
+    println(newFocus.get.toTree.draw foreach {_.print})
   }
 }
