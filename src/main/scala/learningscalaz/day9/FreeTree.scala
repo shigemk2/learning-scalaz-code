@@ -14,5 +14,11 @@ object FreeTree {
           'W'.node('C'.leaf, 'R'.leaf),
           'A'.node('A'.leaf, 'C'.leaf)))
 
+    def changeToP(tree: Tree[Char]): Tree[Char] = tree match {
+      case Tree.Node(x, Stream(
+        l, Tree.Node(y, Stream(
+          Tree.Node(_, Stream(m, n)), r)))) =>
+        x.node(l, y.node('P'.node(m, n), r))
+    }
   }
 }
