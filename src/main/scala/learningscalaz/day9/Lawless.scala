@@ -8,5 +8,7 @@ object Lawless {
     // println(List(1, 2, 3)(3))
     println(List(1, 2, 3)(2))
     // println(List(1, 2, 3) index 3)
+
+    // 他にもEach Pointed Copointedなどがある
   }
 }
