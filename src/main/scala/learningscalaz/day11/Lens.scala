@@ -8,12 +8,18 @@ object Lens {
     case class Point(x: Double, y: Double)
     case class Color(r: Byte, g: Byte, b: Byte)
 
-    case class Turtle(
-      position: Point,
-      heading: Double,
-      color: Color)
+    case class Turtle(position: Point, heading: Double, color: Color) {
+      def forward(dist: Double): Turtle =
+        copy(position =
+          position.copy(
+            x = position.x + dist * math.cos(heading),
+            y = position.y + dist * math.sin(heading)
+          ))
+    }
 
-    println(Turtle(Point(2.0, 3.0), 0.0,
-      Color(255.toByte, 255.toByte, 255.toByte)))
+    val a = Turtle(Point(2.0, 3.0), 0.0,
+      Color(255.toByte, 255.toByte, 255.toByte))
+    println(a)
+    println(a.forward(10))
   }
 }
