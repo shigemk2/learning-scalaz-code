@@ -42,5 +42,17 @@ object StateReader {
     )
     println(setupConnection(goodConfig))
     println(setupConnection(badConfig))
+
+    // type StateTReaderTOption[C, S, A] = StateT[({type l[+X] = ReaderTOption[C, X]})#l, S, A]
+
+    // object StateTReaderTOption extends StateTInstances with StateTFunctions {
+    //   def apply[C, S, A](f: S => (S, A)) = new StateT[({type l[X] = ReaderTOption[C, X]})#l, S, A] {
+    //     def apply(s: S) = f(s).point[({type l[X] = ReaderTOption[C, X]})#l]
+    //   }
+    //   def get[C, S]: StateTReaderTOption[C, S, S] =
+    //     StateTReaderTOption { s => (s, s) }
+    //   def put[C, S](s: S): StateTReaderTOption[C, S, Unit] =
+    //     StateTReaderTOption { _ => (s, ()) }
+    // }
   }
 }
