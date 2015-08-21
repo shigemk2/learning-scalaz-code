@@ -36,5 +36,7 @@ object LensSample {
     val t0 = Turtle(Point(2.0, 3.0), 0.0,
       Color(255.toByte, 255.toByte, 255.toByte))
     println(turtleX.get(t0))
+
+    println(turtleX.set(t0, 5.0))
   }
 }
