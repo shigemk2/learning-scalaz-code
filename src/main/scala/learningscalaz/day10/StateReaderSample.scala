@@ -3,7 +3,8 @@ package learningscalaz.day10
 import scalaz._
 import Scalaz._
 
-object StateReader {
+
+object StateReaderSample {
   def main(args: Array[String]): Unit = {
     def myName(step: String): Reader[String, String] = Reader { step + ", I am " + _}
 
