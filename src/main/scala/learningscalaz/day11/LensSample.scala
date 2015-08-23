@@ -38,5 +38,10 @@ object LensSample {
     println(turtleX.get(t0))
 
     println(turtleX.set(t0, 5.0))
+
+    println(turtleX.mod(_ + 1.0, t0))
+
+    val incX = turtleX =>= {_ + 1.0 }
+    println(incX(t0))
   }
 }
