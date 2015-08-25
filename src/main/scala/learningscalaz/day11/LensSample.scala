@@ -61,5 +61,13 @@ object LensSample {
     )
 
     val turtleY = turtlePosition >=> pointY
+
+    def forward(dist: Double) = for {
+      heading <- turtleHeading
+      x <- turtleX += dist * math.cos(heading)
+      y <- turtleY += dist * math.sin(heading)
+    } yield (x, y)
+    println(forward(10.0)(t0))
+    println(forward(10.0) exec (t0))
   }
 }
