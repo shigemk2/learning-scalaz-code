@@ -49,5 +49,17 @@ object LensSample {
     } yield x
 
     println(incX(t0))
+
+    val turtleHeading = Lens.lensu[Turtle, Double] (
+      (a, value) => a.copy(heading = value),
+      _.heading
+    )
+
+    val pointY = Lens.lensu[Point, Double] (
+      (a, value) => a.copy(y = value),
+      _.y
+    )
+
+    val turtleY = turtlePosition >=> pointY
   }
 }
