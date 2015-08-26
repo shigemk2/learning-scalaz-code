@@ -43,5 +43,15 @@ object MonoidalApplicatives {
       Applicative[Id].product[({type l[X]=List[A]})#l].traverse(f) { x => (((): Id[Unit]), List(x)) }
     println(decompose(List(1, 2, 3, 4)))
     println(decompose(tree))
+    // Sequence
+    println(List(1.some, 2.some).sequence)
+    println(List(1.some, 2.some, none).sequence)
+
+    val validationTree: Tree[Validation[String, Int]] = 1.success[String].node(
+      2.success[String].leaf, 3.success[String].leaf)
+    println(validationTree.sequence[({type l[X]=Validation[String, X]})#l, Int])
+    val failedTree: Tree[Validation[String, Int]] = 1.success[String].node(
+      2.success[String].leaf, "boom".failure[Int].leaf)
+    println(failedTree.sequence[({type l[X]=Validation[String, X]})#l, Int])
   }
 }
