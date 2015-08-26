@@ -24,12 +24,17 @@ object Import {
     println((1 < 10)?? {List("foo")})
     println((1 < 10)!? {List("foo")})
     println((1 > 10)!? {List("foo")})
-    // ListOps
+    // OptionsOps
     println(1.some? "foo" | "bar")
     println(1.some | 2)
     println(none | 3)
     println("hoge".some ? "fuga" | "bar")
     println("".some ? "fuga" | "bar")
     println(none ? "fuga" | "bar")
+    // ListOps
+    println(List(1, 2) filterM {_ => List(true, false)})
+    println(List(1, 2) filterM {_ => List(false, true)})
+    println(List(1, 2) filterM {_ => List(false, false)})
+    println(List(1, 2) filterM {_ => List(true, true)})
   }
 }
