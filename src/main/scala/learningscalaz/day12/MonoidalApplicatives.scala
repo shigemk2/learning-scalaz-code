@@ -39,7 +39,9 @@ object MonoidalApplicatives {
     println(shape(List(1, 2, 3)))
     println(shape(tree).drawTree)
     // 形と内容 3 decompose
-    def decompose[F[_]: Traverse, A](f: F[A]) = (shape(f), contents(f))
+    def decompose[F[_]: Traverse, A](f: F[A]) =
+      Applicative[Id].product[({type l[X]=List[A]})#l].traverse(f) { x => (((): Id[Unit]), List(x)) }
+    println(decompose(List(1, 2, 3, 4)))
     println(decompose(tree))
   }
 }
