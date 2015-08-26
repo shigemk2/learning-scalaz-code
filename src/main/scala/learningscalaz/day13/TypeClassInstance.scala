@@ -31,3 +31,18 @@ object ScalaZAll {
   }
 }
 
+// 標準データ構造の syntax
+object StdBoolean {
+  import scalaz.syntax.std.boolean._
+  def main(args: Array[String]): Unit = {
+    println((1 > 10)? "foo" | "bar")
+  }
+}
+
+object StdAll {
+  import scalaz.syntax.std.all._
+  def main(args: Array[String]): Unit = {
+    println((1 > 10)? "foo" | "bar")
+    println(1.some | 2)
+  }
+}
