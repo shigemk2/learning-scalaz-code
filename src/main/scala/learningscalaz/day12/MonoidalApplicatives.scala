@@ -25,5 +25,13 @@ object MonoidalApplicatives {
     println(List(1, 2, 3) traverse { x => (x > 0) option (x + 1) })
     println(List(1, 2, 0) traverse { x => (x > 0) option (x + 1) })
     println(Monoid[Int].applicative.traverse(List(1, 2, 3)) {_ + 1})
+    // 形と内容
+    def contents[F[_]: Traverse, A](f: F[A]): List[A] =
+      Monoid[List[A]].applicative.traverse(f) {List(_)}
+
+    println(contents(List(1, 2, 3)))
+    println(contents(NonEmptyList(1, 2, 3)))
+    val tree: Tree[Char] = 'P'.node('O'.leaf, 'L'.leaf)
+    println(contents(tree))
   }
 }
