@@ -27,11 +27,19 @@ object MonoidalApplicatives {
     println(Monoid[Int].applicative.traverse(List(1, 2, 3)) {_ + 1})
     // 形と内容
     def contents[F[_]: Traverse, A](f: F[A]): List[A] =
-      Monoid[List[A]].applicative.traverse(f) {List(_)}
+      f.traverse[({type l[X]=List[A]})#l, A] {List(_)}
 
     println(contents(List(1, 2, 3)))
     println(contents(NonEmptyList(1, 2, 3)))
     val tree: Tree[Char] = 'P'.node('O'.leaf, 'L'.leaf)
     println(contents(tree))
+    // 形と内容 2
+    def shape[F[_]: Traverse, A](f: F[A]): F[Unit] =
+      f traverse {_ => ((): Id[Unit])}
+    println(shape(List(1, 2, 3)))
+    println(shape(tree).drawTree)
+    // 形と内容 3 decompose
+    def decompose[F[_]: Traverse, A](f: F[A]) = (shape(f), contents(f))
+    println(decompose(tree))
   }
 }
