@@ -13,5 +13,23 @@ object Import {
     println("log2".tell)
     println(1.success[String])
     println("boom".failureNel[Int])
+    // syntax.std.ToAllStdOps
+    // BooleanOps
+    println(false /\ true)
+    println(false \/ true)
+    println(true option "foo")
+    println((1 > 10)? "foo" | "bar")
+    println((1 > 10)? "hoge" | "fuga")
+    println((1 > 10)?? {List("foo")})
+    println((1 < 10)?? {List("foo")})
+    println((1 < 10)!? {List("foo")})
+    println((1 > 10)!? {List("foo")})
+    // ListOps
+    println(1.some? "foo" | "bar")
+    println(1.some | 2)
+    println(none | 3)
+    println("hoge".some ? "fuga" | "bar")
+    println("".some ? "fuga" | "bar")
+    println(none ? "fuga" | "bar")
   }
 }
