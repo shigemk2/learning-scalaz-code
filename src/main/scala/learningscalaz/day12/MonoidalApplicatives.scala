@@ -53,5 +53,17 @@ object MonoidalApplicatives {
     val failedTree: Tree[Validation[String, Int]] = 1.success[String].node(
       2.success[String].leaf, "boom".failure[Int].leaf)
     println(failedTree.sequence[({type l[X]=Validation[String, X]})#l, Int])
+    // 収集と拡散
+    def collect[F[_]: Traverse, A, S, B](t: F[A])(f: A => B)(g: S => S) =
+      t.traverseS[S, B] { a => State { (s: S) => (g(s), f(a)) } }
+    val loop = collect(List(1, 2, 3, 4)) {(_: Int) * 2} {(_: Int) + 1}
+    println(loop(0))
+    def label[F[_]: Traverse, A](f: F[A]): F[Int] =
+      (f.traverseS {_ => for {
+        n <- get[Int]
+        x <- put(n + 1)
+      } yield n}) eval 0
+    println(label(List(10, 2, 8)))
+    println(label(tree).drawTree)
   }
 }
