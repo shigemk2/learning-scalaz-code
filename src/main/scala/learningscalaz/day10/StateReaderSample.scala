@@ -58,10 +58,29 @@ object StateReaderSample {
 
     type Stack = List[Int]
     type Config = Map[String, String]
-    val pop = StateTReaderTOption[Config, Stack, Int] {
-      case x :: xs => (xs, x)
+    val pop: StateTReaderTOption[Config, Stack, Int] = {
+      import StateTReaderTOption.{get, put}
+      for {
+        s <- get[Config, Stack]
+        val (x :: xs) = s
+        _ <- put(xs)
+      } yield x
     }
 
-    
+    def push(x: Int): StateTReaderTOption[Config, Stack, Unit] = {
+      import StateTReaderTOption.{get, put}
+      for {
+        xs <- get[Config, Stack]
+        r <- put(x :: xs)
+      } yield r
+    }
+
+    def stackManip: StateTReaderTOption[Config, Stack, Int] = for {
+      _ <- push(3)
+      a <- pop
+      b <- pop
+    } yield(b)
+
+    println(stackManip(List(5, 8, 2, 1))(Map()))
   }
 }
