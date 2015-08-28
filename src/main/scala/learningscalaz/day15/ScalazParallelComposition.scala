@@ -12,5 +12,23 @@ object ScalazParallelComposition {
     println(List(1, 2, 3) traverseU f)
     println(List(1, 2, 3) traverseU g)
     println(List(1, 2, 3) traverseU h)
+
+    val text = "the cat in the hat\n sat on the mat\n".toList
+
+    def count[A] = (a: A) => 1
+
+    val charCount = count[Char]
+    println(text traverseU charCount)
+
+    val lineCount = (c: Char) => test(c === '\n')
+    println(text traverseU lineCount)
+
+    val wordCount2 = (c: Char) => for {
+      x <- get[Boolean]
+      val y = c =/= ' '
+      _ <- put(y)
+    } yield test(y /\ !x)
+
+    println((text traverseU wordCount2) eval false count(_ > 0))
   }
 }
