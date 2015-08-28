@@ -30,5 +30,7 @@ object ScalazParallelComposition {
     } yield test(y /\ !x)
 
     println((text traverseU wordCount2) eval false count(_ > 0))
+
+    println(text traverseU { (c: Char) => (charCount(c), lineCount(c)) })
   }
 }
