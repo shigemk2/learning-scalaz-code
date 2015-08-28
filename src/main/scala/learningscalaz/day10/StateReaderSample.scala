@@ -21,28 +21,31 @@ object StateReaderSample {
       def apply[A, B](f: A => Option[B]): ReaderTOption[A, B] = kleisli(f)
     }
 
-    def configure(key: String) = ReaderTOption[Map[String, String], String] {_.get(key)}
+    // def configure(key: String) = ReaderTOption[Map[String, String], String] {_.get(key)}
+    def configure[S](key: String) = new StateTReaderTOption[Config, S, String] {
+      def apply(s: S) = ReaderTOption[Config, (S, String)] { config: Config => config.get(key) map {(s, _)} }
+    }
 
-    def setupConnection = for {
-      host <- configure("host")
-      user <- configure("user")
-      password <- configure("password")
-    } yield (host, user, password)
+    // def setupConnection = for {
+    //   host <- configure("host")
+    //   user <- configure("user")
+    //   password <- configure("password")
+    // } yield (host, user, password)
 
-    val goodConfig = Map(
-      "host" -> "eed3si9n.com",
-      "user" -> "sa",
-      "password" -> "****"
-    )
+    // val goodConfig = Map(
+    //   "host" -> "eed3si9n.com",
+    //   "user" -> "sa",
+    //   "password" -> "****"
+    // )
 
-    println(setupConnection(goodConfig))
+    // println(setupConnection(goodConfig))
 
-    val badConfig = Map(
-      "host" -> "example.com",
-      "user" -> "sa"
-    )
-    println(setupConnection(goodConfig))
-    println(setupConnection(badConfig))
+    // val badConfig = Map(
+    //   "host" -> "example.com",
+    //   "user" -> "sa"
+    // )
+    // println(setupConnection(goodConfig))
+    // println(setupConnection(badConfig))
 
     type StateTReaderTOption[C, S, A] = StateT[({type l[X] = ReaderTOption[C, X]})#l, S, A]
 
@@ -75,12 +78,18 @@ object StateReaderSample {
       } yield r
     }
 
-    def stackManip: StateTReaderTOption[Config, Stack, Int] = for {
-      _ <- push(3)
-      a <- pop
-      b <- pop
-    } yield(b)
+    // def stackManip: StateTReaderTOption[Config, Stack, Int] = for {
+    //   _ <- push(3)
+    //   a <- pop
+    //   b <- pop
+    // } yield(b)
+    def stackManip: StateTReaderTOption[Config, Stack, Unit] = for {
+      x <- configure("x")
+      a <- push(x.toInt)
+    } yield(a)
 
     println(stackManip(List(5, 8, 2, 1))(Map()))
+    println(stackManip(List(5, 8, 2, 1))(Map("x" -> "7")))
+    println(stackManip(List(5, 8, 2, 1))(Map("y" -> "7")))
   }
 }
