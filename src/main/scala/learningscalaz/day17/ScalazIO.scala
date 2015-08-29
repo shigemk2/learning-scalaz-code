@@ -10,7 +10,14 @@ object ScalazIO {
   val action1 = for {
     _ <- putStrLn("Hello, world!")
   } yield ()
+  // IOアクション2
+  val action2 = IO {
+    val source = scala.io.Source.fromFile("./README.md")
+    source.getLines.toStream
+  }
+
   def main(args: Array[String]): Unit = {
     println(action1.unsafePerformIO)
+    println(action2.unsafePerformIO.toList)
   }
 }
