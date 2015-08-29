@@ -19,5 +19,14 @@ object ScalazIO {
   def main(args: Array[String]): Unit = {
     println(action1.unsafePerformIO)
     println(action2.unsafePerformIO.toList)
+
+    // TESS2
+    def program: IO[Unit] = for {
+      line <- readLn
+      _ <- putStrLn(line)
+    } yield ()
+
+    println((program |+| program).unsafePerformIO)
+    println((program |+| program |+| program).unsafePerformIO)
   }
 }
