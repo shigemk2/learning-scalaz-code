@@ -4,6 +4,8 @@ import scalaz._
 import Scalaz._
 import iteratee._
 import Iteratee._
+import effect._
+import java.io._
 
 object ScalazIteratees {
   def main(args: Array[String]): Unit = {
@@ -29,5 +31,8 @@ object ScalazIteratees {
       repeatBuild[E, Option[E], Stream](dropKeep1) map {_.flatten}
 
     println((alternates[Int] &= enumerate(Stream.range(1, 15))).run.force)
+
+    // Iteratees を用いたファイル入力
+    println(enumReader[IO](new BufferedReader(new FileReader("./README.md"))))
   }
 }
