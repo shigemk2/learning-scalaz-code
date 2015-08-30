@@ -34,5 +34,15 @@ object ScalazIteratees {
 
     // Iteratees を用いたファイル入力
     println(enumReader[IO](new BufferedReader(new FileReader("./README.md"))))
+
+    // これも試してみよう
+    def lengthOfTwoFiles(f1: File, f2: File) = {
+      val l1 = length[IoExceptionOr[Char], IO] &= enumReader[IO](new BufferedReader(new FileReader(f1)))
+      val l2 = l1 &= enumReader[IO](new BufferedReader(new FileReader(f2)))
+      l2.run
+    }
+
+    println(lengthOfTwoFiles(new File("./README.md"), new File("./TODO.txt")).unsafePerformIO)
+
   }
 }
