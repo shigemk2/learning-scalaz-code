@@ -17,5 +17,17 @@ object ScalazIteratees {
     }
 
     println((counter[Int] &= enumerate(Stream(1, 2, 3))).run)
+    println((length[Int, Id] &= enumerate(Stream(1, 2, 3))).run)
+
+    // Iteratee の合成
+    def dropKeep1[E]: Iteratee[E, Option[E]] = for {
+      _ <- drop[E, Id](1)
+      x <- head[E, Id]
+    } yield x
+
+    def alternates[E]: Iteratee[E, Stream[E]] =
+      repeatBuild[E, Option[E], Stream](dropKeep1) map {_.flatten}
+
+    println((alternates[Int] &= enumerate(Stream.range(1, 15))).run.force)
   }
 }
