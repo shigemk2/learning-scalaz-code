@@ -14,6 +14,11 @@ object CharToy {
   def done: CharToy[Nothing] = CharDone()
 }
 
+case class Fix[F[_]](f: F[Fix[F]])
+object Fix {
+  def fix(toy: CharToy[Fix[CharToy]]) = Fix[CharToy](toy)
+}
+
 object ScalazFreeMonad {
   // Free Monad
   // sealed trait Toy[+A, +Next]
@@ -26,5 +31,10 @@ object ScalazFreeMonad {
     import CharToy._
     println(output('A', done))
     println(bell(output('A', done)))
+
+    // Fix
+    import Fix._
+    println(fix(output('A', fix(done))))
+    println(fix(bell(fix(output('A', fix(done))))))
   }
 }
