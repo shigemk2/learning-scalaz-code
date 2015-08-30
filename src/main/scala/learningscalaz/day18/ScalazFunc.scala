@@ -10,5 +10,7 @@ object ScalazFunc {
     val f = AppFuncU { (x: Int) => x + 1 }
     val g = AppFuncU { (x: Int) => List(x, 5) }
     println((f @&&& g) traverse List(1, 2, 3))
+    println(f traverse List(1, 2, 3))
+    println(g traverse List(1, 2, 3))
   }
 }
