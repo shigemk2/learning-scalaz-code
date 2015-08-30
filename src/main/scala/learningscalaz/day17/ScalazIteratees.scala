@@ -44,5 +44,9 @@ object ScalazIteratees {
 
     println(lengthOfTwoFiles(new File("./README.md"), new File("./TODO.txt")).unsafePerformIO)
 
+    // sequenceI メソッドは readLn を EnumerateeT に変換して、%= はそれを Iteratee にチェイン
+    val readLn = takeWhile[Char, List](_ != '\n') flatMap (ln => drop[Char, Id](1).map(_ => ln))
+    println((readLn &= enumStream("Iteratees\nare\ncomposable".toStream)).run)
+    println((collect[List[Char], List] %= readLn.sequenceI &= enumStream("Iteratees\nare\ncomposable".toStream)).run)
   }
 }
