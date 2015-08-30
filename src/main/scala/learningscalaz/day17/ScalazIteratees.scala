@@ -16,6 +16,6 @@ object ScalazIteratees {
       cont(step(0))
     }
 
-    // println((counter[Int] &= enumerate(Stream(1, 2, 3))).run)
+    println((counter[Int] &= enumerate(Stream(1, 2, 3))).run)
   }
 }
