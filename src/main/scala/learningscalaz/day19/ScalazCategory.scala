@@ -30,6 +30,9 @@ object ScalazCategory {
     case Sam  => Mary
   }
 
+  // 射の合成
+  val favoritePersonBreakfast = favoriteBreakfast compose favoritePerson
+
   def main(args: Array[String]): Unit = {
     // 集合
     println("-------集合-------")
@@ -51,5 +54,10 @@ object ScalazCategory {
     println(identity(John))
     println(identity(Mary))
     println(identity(Sam))
+    // 射の合成
+    println("-------射の合成-------")
+    println(favoritePersonBreakfast(John))
+    println(favoritePersonBreakfast(Mary))
+    println(favoritePersonBreakfast(Sam))
   }
 }
