@@ -31,10 +31,14 @@ object ScalazCategory {
   }
 
   def main(args: Array[String]): Unit = {
+    // 集合
+    println("-------集合-------")
     val a: Set[Person] = Set[Person](John, Mary, Sam)
     // val a = Set[Person](John, Mary, Sam)
     // val a: List[Person] = List[Person](John, Mary, Sam)
     println(a)
+    // 射
+    println("-------射-------")
     println(favoriteBreakfast(John))
     println(favoriteBreakfast(Mary))
     // 自己準同型射
