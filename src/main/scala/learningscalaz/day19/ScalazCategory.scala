@@ -42,5 +42,10 @@ object ScalazCategory {
     println(favoritePerson(John))
     println(favoritePerson(Mary))
     println(favoritePerson(Sam))
+    // 恒等射
+    println("-------恒等射-------")
+    println(identity(John))
+    println(identity(Mary))
+    println(identity(Sam))
   }
 }
