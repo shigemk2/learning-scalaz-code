@@ -23,6 +23,13 @@ object ScalazCategory {
     case Sam  => Coffee
   }
 
+  // 自己自己準同型射
+  val favoritePerson: Person => Person = {
+    case John => Mary
+    case Mary => John
+    case Sam  => Mary
+  }
+
   def main(args: Array[String]): Unit = {
     val a: Set[Person] = Set[Person](John, Mary, Sam)
     // val a = Set[Person](John, Mary, Sam)
