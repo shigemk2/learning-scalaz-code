@@ -37,5 +37,10 @@ object ScalazCategory {
     println(a)
     println(favoriteBreakfast(John))
     println(favoriteBreakfast(Mary))
+    // 自己準同型射
+    println("-------自己準同型射-------")
+    println(favoritePerson(John))
+    println(favoritePerson(Mary))
+    println(favoritePerson(Sam))
   }
 }
