@@ -7,7 +7,8 @@ libraryDependencies ++= Seq(
   "org.scalaz" %% "scalaz-effect" % scalazVersion,
   "org.scalaz" %% "scalaz-iteratee" % scalazVersion,
   "org.scalaz" %% "scalaz-typelevel" % scalazVersion,
-  "org.scalaz" %% "scalaz-scalacheck-binding" % scalazVersion % "test"
+  "org.scalaz" %% "scalaz-scalacheck-binding" % scalazVersion % "test",
+  "org.scalacheck" %% "scalacheck" % "1.12.4" % "test"
 )
 
 scalacOptions += "-feature"
