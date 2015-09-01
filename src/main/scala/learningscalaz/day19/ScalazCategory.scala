@@ -12,8 +12,9 @@ object ScalazCategory {
   case object Sam extends Person {}
 
   def main(args: Array[String]): Unit = {
-    // val a: Set[Person] = Set[Person](John, Mary, Sam)
-    val a = Set[Person](John, Mary, Sam)
+    val a: Set[Person] = Set[Person](John, Mary, Sam)
+    // val a = Set[Person](John, Mary, Sam)
+    // val a: List[Person] = List[Person](John, Mary, Sam)
     println(a)
   }
 }
