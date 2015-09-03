@@ -8,13 +8,21 @@ object ScalazCoproducts {
   def main(args: Array[String]): Unit = {
     type StringOrInt = t[String]#t[Int]
     implicitly[Int ∈ StringOrInt]
-    // implicitly[Byte ∈ StringOrInt]
-    def size[A](a: A)(implicit ev: A ∈ StringOrInt): Int = a match {
-      case i: Int => i
-      case s: String => s.length
-    }
+    // // implicitly[Byte ∈ StringOrInt]
+    // def size[A](a: A)(implicit ev: A ∈ StringOrInt): Int = a match {
+    //   case i: Int => i
+    //   case s: String => s.length
+    // }
+    // println(size(23))
+    // println(size("foo"))
 
-    println(size(23))
-    println(size("foo"))
+    // \/
+    def size(a: String \/ Int): Int = a match {
+      case \/-(i) => i
+      case -\/(s) => s.length
+    }
+    println(size(23.right[String]))
+    println(size("foo".left[Int]))
+
   }
 }
